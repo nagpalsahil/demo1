@@ -1,0 +1,47 @@
+<p-card>
+<p-panel header="Assessment">
+    <div *ngIf="notSubmitted">
+    <div>
+        <h5>Your Name<span class="text-danger">*</span></h5>
+        <div class="field">
+            <input id="username1" type="username" styleClass="w-full" class="w-full" pInputText/>    
+        </div>
+    </div>
+    <div>
+    <h5>PAN Number<span class="text-danger">*</span></h5>
+    <div class="field">
+        <input id="pan" type="pan" class="w-full" pInputText/>    
+    </div>
+    </div>
+    <div *ngFor="let question of questions">
+        <h5>{{question.questionnaire}}</h5>
+        <div class="field-radiobutton" *ngFor="let option of question['options']">
+            <p-radioButton name="{{option.label}}" value="{{option.label}}" [(ngModel)]="answers[question.id]" inputId="{{question.id}}"></p-radioButton>
+            <label for="{{question.id}}">{{option.label}}</label>
+        </div>
+    </div>
+    
+    <div>
+        <h5>Belongs From</h5>
+        <div class="field">
+            <input id="belongs" type="belongs" class="w-full" pInputText/>    
+        </div>
+        </div>
+    <div class="w-full">
+        <button pButton pRipple type="button" label="Submit to get the Retention Probablity" class="p-button-outlined p-button-success" (click)="showSubmit()"></button>
+        <!-- <button pButton pRipple type="button" label="Danger" class="ml-3 p-button-raised p-button-danger"></button> -->
+    </div>
+</div>
+<div *ngIf="!notSubmitted">
+    Assessment successfully submitted
+    <div class="mt-5">
+        <p-avatar label="{{probab}}" styleClass="xxlarge {{probab=='Low' ? 'b-danger' : probab=='Medium' ? 'b-warning' : 'b-success'}}" size="xxlarge" shape="circle"></p-avatar>
+    </div>
+    <div class="mt-5">
+        <button pButton pRipple type="button" label="Login" class="ml-3 p-button-raised p-button-info" (click)="onLogin()"></button>
+    </div>
+</div>
+</p-panel>
+</p-card>
+
+<p-toast position="top-center" key="success"></p-toast>

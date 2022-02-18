@@ -1,0 +1,32 @@
+<div class="grid">
+	<div class="col-12">
+		<div class="card">
+			<h5 class="mb-2">SFM Candiidate data</h5>
+			<p-table [columns]="cols" [value]="participants" responsiveLayout="scroll">
+				<ng-template pTemplate="header" let-columns>
+					<tr>
+						<th *ngFor="let col of columns">
+							{{col.header}}
+						</th>
+						<th>Action</th>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="body" let-rowData let-columns="columns">
+					<tr>
+						<td *ngFor="let col of columns">
+							<span *ngIf="col.field=='probablity'">
+								<span *ngIf="rowData[col.field]== 3" class="text-success">High</span>
+								<span *ngIf="rowData[col.field]== 2" class="text-warning">Medium</span>
+								<span *ngIf="rowData[col.field]== 1" class="text-danger">Low</span>
+							</span>
+							<span *ngIf="col.field!='probablity'">{{rowData[col.field]}}</span>
+						</td>
+						<td>
+							<i class="pi pi-eye" pTooltip="View Details"></i>
+						</td>
+					</tr>
+				</ng-template>
+			</p-table>
+		</div>
+	</div>
+</div>
